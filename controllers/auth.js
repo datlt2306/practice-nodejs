@@ -48,15 +48,18 @@ export const signout = (req, res) => {
     })
 }
 export const requireSignin = expressJwt({ // decode
+    // Mã bảo mật
     secret: '123456',
+    // Thuật toán để decode token
     algorithms: ["HS256"],
+    // Sau khi decode xong thì tạo ra 1 thuộc tính req.auth và gán thông tin decode
     userProperty: "auth" // req.auth
 });
 export const isAuth = (req, res, next) => {
-    // console.log('req profile', req.profile);
-    // console.log('req', req.auth);
+    // Kiểm tra điều kiện trả về true hoặc false
     let user = req.profile && req.auth && req.profile._id == req.auth._id;
-    // console.log(user);
+
+    // Nếu false ( không phải thành viên hệ thống)
     if (!user) {
         res.json({
             msg: "Access Denined"
@@ -65,7 +68,8 @@ export const isAuth = (req, res, next) => {
     next();
 }
 export const isAdmin = (req, res, next) => {
-    console.log('req profile', req.profile);
+    console.log(req.profile.role);
+    // nếu role == 0 ( nghĩa là quyền là member thì thông báo)
     if (req.profile.role === 0) {
         return res.status(403).json({
             msg: "Bạn không có quyền truy cập"
