@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/user/secret/:userId', requireSignin, isAuth, isAdmin, read);
 
 // Trả về thông tin user
-router.get('/user/:userId', requireSignin, isAuth, read)
+router.get('/user/:userId', requireSignin, isAuth, read);
 router.param('userId', userById);
 
 

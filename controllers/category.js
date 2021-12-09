@@ -1,4 +1,5 @@
 import Category from '../models/category';
+import Product from '../models/product';
 import slugify from 'slugify';
 
 export const list = async (req, res) => {
@@ -7,8 +8,14 @@ export const list = async (req, res) => {
 }
 export const read = async (req, res) => {
     console.log(req.params.slug);
-    const categroy = await Category.find({ slug: req.params.slug }).exec();
-    res.json(categroy);
+    const category = await Category.find({ slug: req.params.slug }).exec();
+    const products = await Product.find({ category })
+        .populate('category')
+        .exec();
+    res.json({
+        category,
+        products
+    });
 }
 export const update = async (req, res) => {
     const { name } = req.body;
