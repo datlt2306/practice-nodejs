@@ -1,9 +1,10 @@
 import express from 'express';
-import { create, listRelated, search, list } from '../controllers/products';
+import { create, listRelated, search, list, read } from '../controllers/products';
 const router = express.Router();
 
 router.post('/product', create);
 router.get('/products', list);
+router.get('/product/:productId', read);
 router.get('/product/related/:productId', listRelated);
 router.post('/product/search', search);
 

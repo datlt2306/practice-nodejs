@@ -1,6 +1,24 @@
 import slugify from 'slugify';
 import Product from '../models/product';
 
+/**
+ * @swagger
+ * /api/product:
+ *  post:
+ *   tags: [Products]
+ *   summary: Tạo sản phẩm mới
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema: 
+ *       $ref: '#/components/schemas/Product'
+ *   responses:
+ *    200:
+ *     description: Tạo sản phẩm thành công
+ *    400:
+ *     description: Tạo sản phẩm không thành công
+ */
 export const create = async (req, res) => {
     try {
         req.body.slug = slugify(req.body.name);
@@ -35,6 +53,36 @@ export const list = async (req, res) => {
         res.json(products)
     } catch (error) {
         console.log(error);
+    }
+}
+/**
+ * @swagger
+ * paths:
+ *  /api/product/{id}:
+ *   get:
+ *    tags: [Products]
+ *    summary: Trả về thông tin một sản phẩm
+ *    parameters:
+ *     - in: path
+ *       name: id
+ *       schema: 
+ *        type: string
+ *       required: true
+ *    responses:
+ *     200:
+ *      description: Trả về thông tin sản phẩm dựa trên id
+ *     404:
+ *      description: Không tìm thấy sản phẩm
+ */
+export const read = async (req, res) => {
+    try {
+        const product = await Product.findOne({ _id: req.params.productId }).exec();
+        if (!product) {
+            res.status(404)
+        }
+        res.json(product);
+    } catch (error) {
+        console.log(error)
     }
 }
 export const listRelated = async (req, res) => {
