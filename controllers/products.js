@@ -13,6 +13,22 @@ export const create = async (req, res) => {
         })
     }
 }
+/**
+ * @swagger
+ * /api/products:
+ *  get:
+ *   tags: [Products]
+ *   summary: Trả về danh sách tất cả sản phẩm
+ *   responses:
+ *    200:
+ *     description: List danh sách sản phẩm
+ *     content: 
+ *      application/json:
+ *       schema:
+ *        type: array
+ *        items:
+ *         $ref: '#/components/schemas/Product'
+ */
 export const list = async (req, res) => {
     try {
         const products = await Product.find({}).exec();

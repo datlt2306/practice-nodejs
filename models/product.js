@@ -53,3 +53,50 @@ const productSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model("Product", productSchema);
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   Product:
+ *    type: object
+ *    properties:
+ *      id:
+ *        type: string
+ *      name:
+ *        type: string
+ *      description:
+ *        type: string
+ *      price:
+ *        type: number
+ *      category:
+ *        type: string
+ *      sold:
+ *        type: number
+ *      images:
+ *        type: array
+ *        items:
+ *         type: string
+ *      shipping:
+ *        type: boolean
+ *      color:
+ *        type: string
+ *      brand:
+ *        type: string
+ *    required:
+ *     - name
+ *     - description
+ *     - price
+ *    example:
+ *      id: _fdakfakhfa
+ *      name: Product A
+ *      description: Mo ta san pham
+ *      price: 200
+ */
+
+/**
+ * @swagger
+ * tags:
+ *  name: Products
+ *  description: API dành cho Product
+ */
