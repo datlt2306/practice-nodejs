@@ -62,5 +62,15 @@ export default mongoose.model('User', userSchema);
 
 /**
  * @swagger
- * /user
+ * components
+ *  schemas:
+ *   User:
+ *    properties:
+ *     name:
+ *      type: string
+ *     email:
+ *      type: string
+ *    required:
+ *     - name
+ *     - email
  */
