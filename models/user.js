@@ -70,7 +70,4 @@ export default mongoose.model('User', userSchema);
  *      type: string
  *     email:
  *      type: string
- *    required:
- *     - name
- *     - email
  */
