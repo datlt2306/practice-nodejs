@@ -59,3 +59,8 @@ userSchema.methods = {
 
 
 export default mongoose.model('User', userSchema);
+
+/**
+ * @swagger
+ * /user
+ */
