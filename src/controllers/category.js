@@ -3,7 +3,7 @@ import Product from '../models/product';
 import slugify from 'slugify';
 
 export const list = async (req, res) => {
-    const category = await Category.find({}).exec();
+    const category = await Category.find({}).sort({createAt: -1}).exec();
     res.json(category);
 }
 export const read = async (req, res) => {

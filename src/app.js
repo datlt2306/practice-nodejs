@@ -1,10 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path'
 import { readdirSync } from 'fs';
 import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
+import { dirname } from 'path';
 require('dotenv').config();
 const app = express();
 
@@ -39,9 +41,11 @@ app.use(cors());
 
 const specs = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
-// Router
-readdirSync('./routes').map(route => app.use("/api", require(`./routes/${route}`)))
 
+// Router
+readdirSync(path.join(__dirname, 'routes'))
+  
+// connected
 const port = process.env.PORT || 8000
 
 app.listen(port, () => {
