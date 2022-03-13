@@ -13,4 +13,5 @@ router.delete('/category/:slug', remove);
 
 router.param('userId', userById)
 
-module.exports = router;
+
+export default router;
